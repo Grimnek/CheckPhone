@@ -20,26 +20,26 @@ def number():
         phoneNumber = phonenumbers.parse(data)
         Carrier = carrier.name_for_number(phoneNumber, 'en')
         Region = geocoder.description_for_number(phoneNumber, 'en')
-        valid = phonenumbers.is_valid_number(phoneNumber)
-        if bool(valid) == True:
-            valid = "Так"
+        Valid = phonenumbers.is_valid_number(phoneNumber)
+        if bool(Valid) == True:
+            Valid = "Так"
         else:
-            valid = "Нi"
-        phone_answer = f"Оператор: {Carrier}\nКраїна: {Region}\nДійсний номер: {valid}"
+            Valid = "Нi"
+        phone_answer = f"Operator: {Carrier}\nCountry: {Region}\nValid number: {Valid}"
         text.delete('1.0', END)
         text.insert('1.0', phone_answer)
     except Exception as e:
-        messagebox.showerror("Помилка", "Введіть номер телефону.")
+        messagebox.showerror("Error", "Enter a phone number with phone code.")
 
 
 def help():
-    messagebox.showinfo("Інформація",
-                        """Вписуємо номер телефону та перевіряємо його на оператора, країну та дійсність номера.""")
+    messagebox.showinfo("Info",
+                        """We enter the phone number with phone code and check it for the operator, country and validity of the number.""")
 
 
 message = StringVar()
 
-message_button = Button(text="Перевірити", padx="20", pady="15", background="#555", foreground="#fff", command=number)
+message_button = Button(text="Check", padx="20", pady="15", background="#555", foreground="#fff", command=number)
 message_button.place(relx=.5, rely=.7, anchor="center")
 
 text = Text(root, width=400, height=400, wrap="word")
@@ -48,7 +48,7 @@ scrollb = Scrollbar(text, orient=VERTICAL, command=text.yview)
 scrollb.pack(side="right", fill="y")
 text.configure(yscrollcommand=scrollb.set)
 
-main_menu.add_cascade(label="Інформація", command=help)
+main_menu.add_cascade(label="Info", command=help)
 
 root.config(menu=main_menu)
 root.mainloop()
